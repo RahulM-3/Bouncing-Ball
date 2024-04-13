@@ -1,4 +1,5 @@
 import tkinter
+import random
 
 # Window setup
 win = tkinter.Tk()
@@ -20,7 +21,7 @@ radius = 150
 canvas.create_oval(canvas_middle[0] - radius, canvas_middle[1] - radius, canvas_middle[0] + radius, canvas_middle[1] + radius, width=3)
 
 # Ball
-attitude = canvas_middle
+attitude = [int(canvas['width'])/2, int(canvas['height'])/2]
 ballradius = 20
 x0 = attitude[0]-ballradius
 y0 = attitude[1]-ballradius
@@ -40,11 +41,18 @@ def gravity():
 
 def collision():
     ballcoords = canvas.coords(ball)
-    print("center", canvas_middle)
-    print("ballcoords", ballcoords, "\n")
+    #print("center", canvas_middle)
+    #print("ballcoords", ballcoords, "\n")
+    if (abs(ballcoords[3]-canvas_middle[1]) >= 147):
+        print("Collided")
+        attitude[1] -= 100
+        if(random.randint(0, 2)):
+            attitude[0] += 100
+        else:
+            attitude[0] -= 100
     win.after(100,collision)
-collision() 
 
+collision()
 gravity()
 
 # application loop
