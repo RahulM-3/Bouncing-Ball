@@ -36,7 +36,14 @@ def gravity():
     x1 = attitude[0]+ballradius
     y1 = attitude[1]+ballradius
     canvas.coords(ball, x0, y0, x1, y1)
-    win.after(100, gravity, )
+    win.after(100, gravity)
+
+def collision():
+    ballcoords = canvas.coords(ball)
+    print("center", canvas_middle)
+    print("ballcoords", ballcoords, "\n")
+    win.after(100,collision)
+collision() 
 
 gravity()
 
